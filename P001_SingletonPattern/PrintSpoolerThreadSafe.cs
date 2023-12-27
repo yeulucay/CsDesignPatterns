@@ -2,7 +2,7 @@ namespace P001_SingletonPattern;
 
 public class PrintSpoolerThreadSafe
 {
-    private static volatile PrintSpoolerThreadSafe instance;
+    private static volatile PrintSpoolerThreadSafe? instance;
     private static readonly object syncRoot = new();
 
     private PrintSpoolerThreadSafe()
@@ -15,10 +15,7 @@ public class PrintSpoolerThreadSafe
         {
             lock (syncRoot)
             {
-                if (instance is null)
-                {
-                    instance = new PrintSpoolerThreadSafe();
-                }
+                instance ??= new PrintSpoolerThreadSafe();
             }
         }
 
